@@ -4,9 +4,9 @@ Matrix::Matrix(int n, int m){
     std::cout << "Constructor" << std::endl;
     m_n = n;
     m_m = m;
-    m_mat = new int* [m_n];
+    m_mat = new double* [m_n];
     for (int i = 0; i < m_n; i++)
-        m_mat[i] = new int[m_m];
+        m_mat[i] = new double[m_m];
 }
 Matrix::~Matrix(){
     std::cout << "Destructor" << std::endl;
@@ -20,9 +20,9 @@ Matrix::Matrix(const Matrix& mat){
     m_n = mat.m_n;
     m_m = mat.m_m;
 
-    m_mat = new int* [m_n];
+    m_mat = new double* [m_n];
     for (int i = 0; i < m_n; i++)
-        m_mat[i] = new int[m_m];
+        m_mat[i] = new double[m_m];
 
     for (int i = 0; i < m_n; i++)
         for (int j = 0; j < m_m; j++)
@@ -104,7 +104,38 @@ int Matrix::determinant(const Matrix& mat){
         return det;
     } else {
         std::cout << "Вычисление определителя такого порядка не поддерживается" << std::endl;
+        return -1;
     }
+}
+Matrix Matrix::inverse(const Matrix& mat){
+    Matrix tmp(m_n,m_m);
+    if((m_n == 2 && m_m == 2) || (m_n == 3 && m_m == 3)){
+        int det = determinant(mat);
+        if(det == 0) {
+            std::cout << "Обратной матрицы не существует, так как определитель равен 0" << std::endl;
+            return tmp;
+        }
+        if(m_n == 2){
+            tmp.m_mat[0][0] = m_mat[1][1]/det;
+            tmp.m_mat[0][1] = -m_mat[0][1]/det;
+            tmp.m_mat[1][0] = -m_mat[1][0]/det;
+            tmp.m_mat[1][1] = m_mat[0][0]/det;
+        }
+        if(m_n == 3){
+            tmp.m_mat[0][0] = (m_mat[1][1]*m_mat[2][2] - m_mat[2][1]*m_mat[1][2])/det;
+            tmp.m_mat[0][1] = -(m_mat[0][1]*m_mat[2][2] - m_mat[2][1]*m_mat[0][2])/det;
+            tmp.m_mat[0][2] = (m_mat[0][1]*m_mat[1][2] - m_mat[1][1]*m_mat[0][2])/det;
+            tmp.m_mat[1][0] = -(m_mat[1][0]*m_mat[2][2] - m_mat[2][0]*m_mat[1][2])/det;
+            tmp.m_mat[1][1] = (m_mat[0][0]*m_mat[2][2] - m_mat[2][0]*m_mat[0][2])/det;
+            tmp.m_mat[1][2] = -(m_mat[0][0]*m_mat[1][2] - m_mat[1][0]*m_mat[0][2])/det;
+            tmp.m_mat[2][0] = (m_mat[1][0]*m_mat[2][1] - m_mat[2][0]*m_mat[1][1])/det;
+            tmp.m_mat[2][1] = -(m_mat[0][0]*m_mat[2][1] - m_mat[2][0]*m_mat[0][1])/det;
+            tmp.m_mat[2][2] = (m_mat[0][0]*m_mat[1][1] - m_mat[1][0]*m_mat[0][1])/det;
+        }
+    } else {
+        std::cout << "Вычисление обратной матрицы такого порядка не поддерживается" << std::endl;
+    }
+    return tmp;
 }
 
 std::istream& operator>>(std::istream& in, Matrix& mat){

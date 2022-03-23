@@ -13,6 +13,7 @@ class Matrix{
         Matrix operator-=(const Matrix& mat);
         Matrix transposition(const Matrix& mat);
         int determinant(const Matrix& mat);
+        Matrix inverse(const Matrix& mat);
         ~Matrix();
 
     friend std::istream& operator>>(std::istream& os, Matrix& mat);
@@ -20,8 +21,7 @@ class Matrix{
 
     private:
         int m_n, m_m;
-        int n;
-        int** m_mat;
+        double** m_mat;
 };
 
 
