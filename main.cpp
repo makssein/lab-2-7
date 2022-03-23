@@ -3,11 +3,8 @@
 int main() {
     Matrix A(3,3);
     std::cin >> A;
-    Matrix B(3,3);
-    std::cin >> B;
-    Matrix C(3,3);
 
-    C = A-B;
-    std::cout << C;
+    A.transposition(A);
+    std::cout << A;
     return 0;
 }

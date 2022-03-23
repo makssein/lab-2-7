@@ -11,7 +11,9 @@ class Matrix{
         Matrix operator*(const Matrix& mat);
         Matrix operator-(const Matrix& mat);
         Matrix operator-=(const Matrix& mat);
+        Matrix transposition(const Matrix& mat);
         ~Matrix();
+
     friend std::istream& operator>>(std::istream& os, Matrix& mat);
     friend std::ostream& operator<<(std::ostream& os, const Matrix& mat);
 
