@@ -4,7 +4,7 @@ int main() {
     Matrix A(3,3);
     std::cin >> A;
 
-    A.transposition(A);
-    std::cout << A;
+
+    std::cout << A.determinant(A);
     return 0;
 }

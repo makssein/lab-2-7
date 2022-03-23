@@ -87,11 +87,24 @@ Matrix Matrix::operator-=(const Matrix& mat) {
 Matrix Matrix::transposition(const Matrix& mat){
     std::cout << "transposition" << std::endl;
     Matrix tmp(m_n,m_m);
-    tmp = mat;
     for(int i = 0; i < m_n; i++)
         for(int j = 0; j < m_m; j++)
-            mat.m_mat[i][j] = tmp.m_mat[j][i];
-    return mat;
+            tmp.m_mat[i][j] = mat.m_mat[j][i];
+    return tmp;
+}
+int Matrix::determinant(const Matrix& mat){
+    int det = 0;
+    if(m_n == 2 && m_m == 2){
+        det = m_mat[0][0] * m_mat [1][1] - m_mat[0][1]*m_mat[1][0];
+        return det;
+    } else if(m_n == 3 && m_m == 3){
+        det = m_mat[0][0]*(m_mat[1][1]*m_mat[2][2] - m_mat[1][2]*m_mat[2][1]) -
+                m_mat[0][1]*(m_mat[1][0]*m_mat[2][2] - m_mat[1][2]*m_mat[2][0]) +
+                m_mat[0][2]*(m_mat[1][0]*m_mat[2][1] - m_mat[1][1]*m_mat[2][0]);
+        return det;
+    } else {
+        std::cout << "Вычисление определителя такого порядка не поддерживается" << std::endl;
+    }
 }
 
 std::istream& operator>>(std::istream& in, Matrix& mat){
