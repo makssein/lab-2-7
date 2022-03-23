@@ -58,10 +58,14 @@ Matrix Matrix::operator+=(const Matrix& mat) {
 }
 Matrix Matrix::operator*(const Matrix& mat) {
     std::cout << "operator*" << std::endl;
-    Matrix tmp(2, 3);
-    for (int i = 0; i < m_n; i++)
-        for (int j = 0; j < m_m; j++)
-            tmp.m_mat[i][j] = m_mat[i][j] + mat.m_mat[i][j];
+    Matrix tmp(m_n, mat.m_m);
+    for (int i = 0; i < m_n; i++){
+        for (int j = 0; j < mat.m_m; j++){
+            tmp.m_mat[i][j] = 0;
+            for (int k = 0; k < m_m; k++)
+                tmp.m_mat[i][j] += m_mat[i][k] * mat.m_mat[k][j];
+        }
+    }
     return tmp;
 }
 
