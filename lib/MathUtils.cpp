@@ -68,6 +68,22 @@ Matrix Matrix::operator*(const Matrix& mat) {
     }
     return tmp;
 }
+Matrix Matrix::operator-(const Matrix& mat) {
+    std::cout << "operator-" << std::endl;
+    Matrix tmp(m_n, m_m);
+    for (int i = 0; i < m_n; i++)
+        for (int j = 0; j < m_m; j++)
+            tmp.m_mat[i][j] = m_mat[i][j] - mat.m_mat[i][j];
+    return tmp;
+}
+Matrix Matrix::operator-=(const Matrix& mat) {
+    std::cout << "operator+=" << std::endl;
+    Matrix tmp(m_n, m_m);
+    for (int i = 0; i < m_n; i++)
+        for (int j = 0; j < m_m; j++)
+            tmp.m_mat[i][j] = m_mat[i][j] - mat.m_mat[i][j];
+    return tmp;
+}
 
 std::istream& operator>>(std::istream& in, Matrix& mat){
     for (int i = 0; i < mat.m_n; i++)

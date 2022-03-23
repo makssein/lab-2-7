@@ -7,7 +7,7 @@ int main() {
     std::cin >> B;
     Matrix C(3,3);
 
-    C = A*B;
+    C = A-B;
     std::cout << C;
     return 0;
 }
