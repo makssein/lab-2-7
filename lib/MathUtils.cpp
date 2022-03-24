@@ -84,15 +84,15 @@ Matrix Matrix::operator-=(const Matrix& mat) {
             tmp.m_mat[i][j] = m_mat[i][j] - mat.m_mat[i][j];
     return tmp;
 }
-Matrix Matrix::transposition(const Matrix& mat){
+Matrix Matrix::transposition(){
     std::cout << "transposition->" << std::endl;
     Matrix tmp(m_n,m_m);
     for(int i = 0; i < m_n; i++)
         for(int j = 0; j < m_m; j++)
-            tmp.m_mat[i][j] = mat.m_mat[j][i];
+            tmp.m_mat[i][j] = m_mat[j][i];
     return tmp;
 }
-int Matrix::determinant(const Matrix& mat){
+int Matrix::determinant(){
     std::cout << "determinant->" << std::endl;
     int det = 0;
     if(m_n == 2 && m_m == 2){
@@ -108,14 +108,14 @@ int Matrix::determinant(const Matrix& mat){
         return -1;
     }
 }
-Matrix Matrix::inverse(const Matrix& mat){
+Matrix Matrix::inverse(){
     std::cout << "inverse->" << std::endl;
     Matrix tmp(m_n,m_m);
     for(int i = 0; i < m_n; i++)
         for(int j = 0; j < m_m; j++)
             tmp.m_mat[i][j] = 0;
     if((m_n == 2 && m_m == 2) || (m_n == 3 && m_m == 3)){
-        int det = determinant(mat);
+        int det = determinant();
         if(det == 0) {
             std::cout << "Обратной матрицы не существует, так как определитель равен 0" << std::endl;
             return tmp;

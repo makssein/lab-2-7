@@ -15,8 +15,8 @@ int main() {
     C = A-B;
     std::cout << C << std::endl;
 
-    std::cout << A.inverse(A) << std::endl;
-    std::cout << A.determinant(A) << std::endl;
-    std::cout << A.transposition(A) << std::endl;
+    std::cout << A.inverse() << std::endl;
+    std::cout << A.determinant() << std::endl;
+    std::cout << A.transposition() << std::endl;
     return 0;
 }
