@@ -85,7 +85,7 @@ Matrix Matrix::operator-=(const Matrix& mat) {
     return tmp;
 }
 Matrix Matrix::transposition(const Matrix& mat){
-    std::cout << "transposition" << std::endl;
+    std::cout << "transposition->" << std::endl;
     Matrix tmp(m_n,m_m);
     for(int i = 0; i < m_n; i++)
         for(int j = 0; j < m_m; j++)
@@ -93,6 +93,7 @@ Matrix Matrix::transposition(const Matrix& mat){
     return tmp;
 }
 int Matrix::determinant(const Matrix& mat){
+    std::cout << "determinant->" << std::endl;
     int det = 0;
     if(m_n == 2 && m_m == 2){
         det = m_mat[0][0] * m_mat [1][1] - m_mat[0][1]*m_mat[1][0];
@@ -108,7 +109,11 @@ int Matrix::determinant(const Matrix& mat){
     }
 }
 Matrix Matrix::inverse(const Matrix& mat){
+    std::cout << "inverse->" << std::endl;
     Matrix tmp(m_n,m_m);
+    for(int i = 0; i < m_n; i++)
+        for(int j = 0; j < m_m; j++)
+            tmp.m_mat[i][j] = 0;
     if((m_n == 2 && m_m == 2) || (m_n == 3 && m_m == 3)){
         int det = determinant(mat);
         if(det == 0) {
